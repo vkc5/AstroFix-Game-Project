@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a1e8382a53838a84bb39751df9bdbd4b
+timeCreated: 1520789755
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Scripts/LightFlashing.cs
+  uploadId: 235189

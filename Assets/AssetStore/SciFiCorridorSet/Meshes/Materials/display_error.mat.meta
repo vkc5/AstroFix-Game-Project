@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7dd0a899d69ef5e4da38af30dee426f6
+timeCreated: 1520680343
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Meshes/Materials/display_error.mat
+  uploadId: 235189

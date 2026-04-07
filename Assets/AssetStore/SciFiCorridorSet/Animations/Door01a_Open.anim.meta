@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3b7577a578a455f4b91292c3cc3e7246
+timeCreated: 1521025287
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Animations/Door01a_Open.anim
+  uploadId: 235189

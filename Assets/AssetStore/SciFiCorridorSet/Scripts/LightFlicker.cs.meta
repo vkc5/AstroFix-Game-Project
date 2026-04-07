@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d1a635d5a916ecd43999565e95009d58
+timeCreated: 1520857382
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Scripts/LightFlicker.cs
+  uploadId: 235189

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d2697eab0a3592f47aa73a63f9f7e47e
+timeCreated: 1520842211
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/doorbase03destroyed.prefab
+  uploadId: 235189

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 899f12f34fbef8a43a0c59bc09f16bd9
+timeCreated: 1520683866
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/corridorend01.prefab
+  uploadId: 235189

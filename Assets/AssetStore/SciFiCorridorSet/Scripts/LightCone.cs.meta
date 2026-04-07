@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 9d5afd0ed24e95145a38a98741145630
+timeCreated: 1520082114
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Scripts/LightCone.cs
+  uploadId: 235189

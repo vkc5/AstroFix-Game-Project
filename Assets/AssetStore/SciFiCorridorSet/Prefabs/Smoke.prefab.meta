@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d39a9efe0f63fdf4194e63bd208fcd28
+timeCreated: 1520709838
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/Smoke.prefab
+  uploadId: 235189

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ceec9af0f99c998478a9fdeae5bd16a4
+timeCreated: 1520672196
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Meshes/Materials/panel_display.mat
+  uploadId: 235189

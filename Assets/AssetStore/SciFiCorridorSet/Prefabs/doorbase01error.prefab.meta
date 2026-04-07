@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e58d3455ed70e294a9775d7ba78bcff1
+timeCreated: 1520864842
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/doorbase01error.prefab
+  uploadId: 235189

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d80c130a1e095094297f28bdc47eb5db
+timeCreated: 1520680677
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/monitor_error.prefab
+  uploadId: 235189

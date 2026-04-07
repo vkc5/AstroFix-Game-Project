@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 741e71dd3d26eed4d815494b83dc1a22
+timeCreated: 1520016510
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Meshes/Materials/lightcone.mat
+  uploadId: 235189

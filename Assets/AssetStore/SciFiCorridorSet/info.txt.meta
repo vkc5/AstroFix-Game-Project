@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d826f564e6ae73a46a7eacfe8efe4f1b
+timeCreated: 1521048615
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/info.txt
+  uploadId: 235189

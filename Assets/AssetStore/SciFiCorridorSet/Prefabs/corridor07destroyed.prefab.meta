@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b0cce434a35ce074088100f50e386407
+timeCreated: 1520793204
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/corridor07destroyed.prefab
+  uploadId: 235189

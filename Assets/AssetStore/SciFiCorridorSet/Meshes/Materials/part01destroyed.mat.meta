@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5c22d2d29fcf9bb42b12f62e0f874709
+timeCreated: 1520788784
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Meshes/Materials/part01destroyed.mat
+  uploadId: 235189

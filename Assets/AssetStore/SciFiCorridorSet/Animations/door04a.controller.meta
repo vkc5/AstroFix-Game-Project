@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6b6ed628b9fc25a4bb861d8fbb209c68
+timeCreated: 1521040610
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Animations/door04a.controller
+  uploadId: 235189

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e843f53b924d9f9428c8c1f4ad87da0b
+timeCreated: 1520862137
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/rooflamp01.prefab
+  uploadId: 235189

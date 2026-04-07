@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 603b96a917d893a478b5edd9eb7079ba
+timeCreated: 1520080842
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Meshes/Materials/spehercone.mat
+  uploadId: 235189

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5f1584389c4d17b4db30be408f1c833c
+timeCreated: 1520170621
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Meshes/Materials/part03glass.mat
+  uploadId: 235189

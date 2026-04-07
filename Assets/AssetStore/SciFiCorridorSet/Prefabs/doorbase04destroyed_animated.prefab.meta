@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7533ef820bdee8545b879205b7e55862
+timeCreated: 1521041387
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/doorbase04destroyed_animated.prefab
+  uploadId: 235189

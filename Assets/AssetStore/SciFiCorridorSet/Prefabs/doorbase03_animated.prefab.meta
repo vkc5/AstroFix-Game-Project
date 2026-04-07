@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7d20b982f468ea140ae06419f89463f4
+timeCreated: 1521024966
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/doorbase03_animated.prefab
+  uploadId: 235189

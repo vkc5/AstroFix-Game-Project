@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 587ebb3fb48c56a47b0cdaf9d4fd1fde
+timeCreated: 1519740263
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/lightring01.prefab
+  uploadId: 235189

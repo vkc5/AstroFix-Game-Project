@@ -1,0 +1,4 @@
+Thank you that purchase the SciFi corridor set!
+
+Some info for use. 
+Please import the characters from the Standard Assets, put the FPS controller to the sample scene. After search in the scene hierarchy to the SphereCone. Select all cones and please link to your camera to the M Camera Tr slot. That all light cone rotate to the your camera.

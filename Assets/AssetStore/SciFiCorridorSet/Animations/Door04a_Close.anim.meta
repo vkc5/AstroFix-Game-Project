@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 61f2fe9b5fa085248a03a4f3e4d8227a
+timeCreated: 1521040642
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Animations/Door04a_Close.anim
+  uploadId: 235189

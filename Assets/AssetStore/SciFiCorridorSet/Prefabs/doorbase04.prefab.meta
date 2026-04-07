@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c3407a47b0ce41247836526880c50886
+timeCreated: 1520674984
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/doorbase04.prefab
+  uploadId: 235189

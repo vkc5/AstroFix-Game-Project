@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6995d41fa1d1fad4ea92ebbf74deca64
+timeCreated: 1520683961
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/corner01.prefab
+  uploadId: 235189

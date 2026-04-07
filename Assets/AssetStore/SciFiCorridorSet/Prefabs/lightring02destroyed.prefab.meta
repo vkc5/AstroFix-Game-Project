@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fcc94326e3b34bf408aaa079f4b9f1a8
+timeCreated: 1520861406
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 114041
+  packageName: SciFi Corridor Set
+  packageVersion: 1.0
+  assetPath: Assets/SciFiCorridorSet/Prefabs/lightring02destroyed.prefab
+  uploadId: 235189
