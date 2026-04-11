@@ -144,7 +144,7 @@ Material:
     - _Specular: {r: 1, g: 1, b: 1, a: 0.24705882}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3150202451355056291
+--- !u!114 &6622122319205101042
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
