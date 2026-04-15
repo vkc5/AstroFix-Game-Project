@@ -4,41 +4,52 @@ public class PlayerMovement : MonoBehaviour
 {
     public float walkSpeed = 3f;
     public float runSpeed = 6f;
-    public float rotationSpeed = 150f;
+    public float rotationSpeed = 180f;
 
     private Animator animator;
+    private Rigidbody rb;
+
+    private float moveInput;
+    private float turnInput;
+    private bool isRunning;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        float move = Input.GetAxisRaw("Vertical");
-        float turn = Input.GetAxisRaw("Horizontal");
-
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        float currentSpeed = isRunning ? runSpeed : walkSpeed;
-
-        transform.Translate(Vector3.forward * move * currentSpeed * Time.deltaTime);
-        transform.Rotate(Vector3.up * turn * rotationSpeed * Time.deltaTime);
+        moveInput = Input.GetAxisRaw("Vertical");
+        turnInput = Input.GetAxisRaw("Horizontal");
+        isRunning = Input.GetKey(KeyCode.LeftShift);
 
         if (animator != null)
         {
-            float animValue = move;
+            float animValue = 0f;
 
-            if (isRunning && move > 0)
+            if (isRunning && moveInput > 0)
                 animValue = 2f;
-            else if (move > 0)
+            else if (moveInput > 0)
                 animValue = 1f;
-            else if (move < 0)
+            else if (moveInput < 0)
                 animValue = -1f;
             else
                 animValue = 0f;
 
             animator.SetFloat("Speed", animValue);
         }
+    }
+
+    void FixedUpdate()
+    {
+        float currentSpeed = isRunning ? runSpeed : walkSpeed;
+
+        Vector3 move = transform.forward * moveInput * currentSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + move);
+
+        Quaternion turnRotation = Quaternion.Euler(0f, turnInput * rotationSpeed * Time.fixedDeltaTime, 0f);
+        rb.MoveRotation(rb.rotation * turnRotation);
     }
 }
