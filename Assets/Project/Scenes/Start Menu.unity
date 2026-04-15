@@ -434,7 +434,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'left '
+  m_Text: 'Left '
 --- !u!222 &354366389
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2817,7 +2817,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'forward '
+  m_Text: Forward / Run
 --- !u!222 &963330313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2896,7 +2896,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: interact
+  m_Text: Interact
 --- !u!222 &964179508
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3710,7 +3710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'right '
+  m_Text: 'Right '
 --- !u!222 &1096433317
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3995,7 +3995,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: backward
+  m_Text: Backward
 --- !u!222 &1155686783
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6708,7 +6708,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: W
+  m_Text: Shift + W
 --- !u!222 &2094161031
 CanvasRenderer:
   m_ObjectHideFlags: 0
