@@ -3,12 +3,15 @@ using UnityEngine;
 public class LaserReceiver : MonoBehaviour
 {
     public bool isActivated;
+    public LevelLightController levelLightController;
 
     public void Activate()
     {
         if (isActivated) return;
 
         isActivated = true;
-        Debug.Log("Puzzle target activated");
+
+        if (levelLightController != null)
+            levelLightController.TurnOnLevel();
     }
 }

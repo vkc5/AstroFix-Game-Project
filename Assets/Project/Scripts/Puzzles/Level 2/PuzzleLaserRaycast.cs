@@ -5,8 +5,8 @@ public class PuzzleLaserRaycast : MonoBehaviour
     public Transform firePoint;
     public LineRenderer lineRenderer;
 
-    public float maxDistance = 50f;
-    public int maxBounces = 5;
+    public float maxDistance = 100f;
+    public int maxBounces = 7;
     public bool laserOn = false;
 
     public LayerMask laserHitLayers;

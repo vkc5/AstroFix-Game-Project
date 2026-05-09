@@ -10,6 +10,8 @@ TagManager:
   - Generator
   - Target
   - LaserSource
+  - Music
+  - SFX
   layers:
   - Default
   - TransparentFX

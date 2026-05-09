@@ -40,6 +40,11 @@ public class PlayerInteraction : MonoBehaviour
                     Debug.Log("Controlling mirror");
                     return;
                 }
+                if (hit.CompareTag("Generator"))
+                {
+                    hit.GetComponent<LaserReceiver>()?.Activate();
+                    return;
+                }
             }
 
             Debug.Log("Nothing to interact with");

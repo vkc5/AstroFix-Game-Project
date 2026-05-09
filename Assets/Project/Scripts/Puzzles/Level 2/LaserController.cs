@@ -9,6 +9,24 @@ public class LaserController : MonoBehaviour
     public float rotateSpeed = 80f;
     public bool isControlled;
 
+    public AudioSource laserAudio;
+    private bool laserOn;
+
+    public void TurnOn()
+    {
+        laserOn = true;
+
+        if (laserAudio != null && !laserAudio.isPlaying)
+            laserAudio.Play();
+    }
+    public void TurnOff()
+    {
+        laserOn = false;
+
+        if (laserAudio != null)
+            laserAudio.Stop();
+    }
+
     void Update()
     {
         if (!isControlled) return;
@@ -29,6 +47,10 @@ public class LaserController : MonoBehaviour
     public void ToggleControl()
     {
         isControlled = !isControlled;
-        laserReflection.TurnOn(); // KEEP AS IS (since yours works)
+
+        if (laserReflection != null)
+            laserReflection.TurnOn();
+
+        TurnOn();
     }
 }

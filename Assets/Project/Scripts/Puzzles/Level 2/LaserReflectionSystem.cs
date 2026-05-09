@@ -5,7 +5,7 @@ public class LaserReflectionSystem : MonoBehaviour
     public Transform firePoint;
     public LineRenderer lineRenderer;
     public float maxDistance = 60f;
-    public int maxBounces = 5;
+    public int maxBounces = 6;
     public LayerMask hitLayers;
 
     [Header("HUD")]

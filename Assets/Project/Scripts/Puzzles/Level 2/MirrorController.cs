@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MirrorController : MonoBehaviour
 {
-    public float rotateSpeed = 80f;
+    public float rotateSpeed = 50f;
     public bool isControlled = false;
 
     void Update()
