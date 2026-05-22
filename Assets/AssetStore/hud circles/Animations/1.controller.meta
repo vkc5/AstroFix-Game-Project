@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6c512e4aaf053b1488239f1eb985f9de
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 193135
+  packageName: SCI-FI HUD UI Circles Elements-Space GUI components
+  packageVersion: 1.0
+  assetPath: Assets/hud circles/Animations/1.controller
+  uploadId: 427610

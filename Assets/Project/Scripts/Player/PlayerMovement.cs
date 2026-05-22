@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float moveInput;
     private float turnInput;
     private bool isRunning;
-
+    public bool canMove = true;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,6 +22,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+        {
+            moveInput = 0;
+            turnInput = 0;
+
+            if (animator != null)
+                animator.SetFloat("Speed", 0);
+
+            return;
+        }
         moveInput = Input.GetAxisRaw("Vertical");
         turnInput = Input.GetAxisRaw("Horizontal");
         isRunning = Input.GetKey(KeyCode.LeftShift);
@@ -40,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetFloat("Speed", animValue);
         }
+
     }
 
     void FixedUpdate()
