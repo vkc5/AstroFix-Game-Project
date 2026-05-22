@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SparkHazard : MonoBehaviour
 {
@@ -22,8 +21,15 @@ public class SparkHazard : MonoBehaviour
         if (other.CompareTag("Player") || other.transform.root.CompareTag("Player"))
         {
             triggered = true;
-            Debug.Log("Player entered spark danger zone. Restarting scene...");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            Debug.Log("Player hit by spark!");
+
+            GameOverManager gameOver = FindFirstObjectByType<GameOverManager>();
+
+            if (gameOver != null)
+            {
+                gameOver.GameOver();
+            }
         }
     }
 }
