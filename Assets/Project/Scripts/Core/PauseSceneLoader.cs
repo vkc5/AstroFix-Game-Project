@@ -25,6 +25,7 @@ public class PauseSceneLoader : MonoBehaviour
         {
             TogglePause();
         }
+
     }
 
     public void TogglePause()
@@ -74,5 +75,9 @@ public class PauseSceneLoader : MonoBehaviour
 
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+    }
+    public void SetCanPause(bool value)
+    {
+        canPause = value;
     }
 }
