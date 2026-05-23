@@ -7735,7 +7735,7 @@ MonoBehaviour:
   interactDistance: 3
   keypadLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   camera_1: {fileID: 965925684}
   camera_2: {fileID: 2136451545}
 --- !u!4 &645943436 stripped
@@ -10943,10 +10943,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThirdPersonCamera
   target: {fileID: 319668321}
-  offset: {x: 0, y: 2, z: -4}
+  distance: 5.5
+  height: 2.2
+  smoothSpeed: 10
   mouseSensitivity: 3
   minPitch: -30
   maxPitch: 60
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  collisionRadius: 0.25
+  minDistance: 1.2
+  collisionOffset: 0.2
 --- !u!114 &965925691
 MonoBehaviour:
   m_ObjectHideFlags: 0

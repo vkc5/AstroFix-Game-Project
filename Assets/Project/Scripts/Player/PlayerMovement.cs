@@ -64,4 +64,8 @@ public class PlayerMovement : MonoBehaviour
         Quaternion turnRotation = Quaternion.Euler(0f, turnInput * rotationSpeed * Time.fixedDeltaTime, 0f);
         rb.MoveRotation(rb.rotation * turnRotation);
     }
+    public void SetMovementState(bool state)
+    {
+        canMove = state;
+    }
 }
