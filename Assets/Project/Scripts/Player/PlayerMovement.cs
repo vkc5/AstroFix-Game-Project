@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private float turnInput;
     private bool isRunning;
 
+    // New variable to control whether the player can move or not
+    private bool canMove = true;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,9 +24,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        moveInput = Input.GetAxisRaw("Vertical");
-        turnInput = Input.GetAxisRaw("Horizontal");
-        isRunning = Input.GetKey(KeyCode.LeftShift);
+        // Check if movement is allowed before processing inputs
+        if (canMove)
+        {
+            moveInput = Input.GetAxisRaw("Vertical");
+            turnInput = Input.GetAxisRaw("Horizontal");
+            isRunning = Input.GetKey(KeyCode.LeftShift);
+        }
+        else
+        {
+            // Reset inputs to stop movement and animations instantly when movement is disabled
+            moveInput = 0f;
+            turnInput = 0f;
+            isRunning = false;
+        }
 
         if (animator != null)
         {
@@ -51,5 +65,14 @@ public class PlayerMovement : MonoBehaviour
 
         Quaternion turnRotation = Quaternion.Euler(0f, turnInput * rotationSpeed * Time.fixedDeltaTime, 0f);
         rb.MoveRotation(rb.rotation * turnRotation);
+    }
+
+    /// <summary>
+    /// Public function to enable or disable player movement from other scripts (e.g., Interaction System)
+    /// </summary>
+    /// <param name="state">True to enable movement, False to disable it</param>
+    public void SetMovementState(bool state)
+    {
+        canMove = state;
     }
 }
