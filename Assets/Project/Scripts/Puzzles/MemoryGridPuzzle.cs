@@ -286,6 +286,9 @@ public class MemoryGridPuzzle : MonoBehaviour
 
                 OpenDoor();
 
+                // SAVE LEVEL 1 COMPLETE
+                GameProgressManager.Instance.CompleteStep(1);
+
                 if (playerMovement != null)
                     playerMovement.enabled = true;
 

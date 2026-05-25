@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HallwaySpawnManager : MonoBehaviour
@@ -12,8 +13,13 @@ public class HallwaySpawnManager : MonoBehaviour
     public Transform afterLevel4Spawn;
     public Transform afterLevel5Spawn;
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return null;
+        yield return null;
+
+        GameProgressManager.Instance.LoadProgress();
+
         int completed = GameProgressManager.Instance.latestCompletedStep;
 
         Transform spawn = defaultSpawn;
@@ -25,7 +31,40 @@ public class HallwaySpawnManager : MonoBehaviour
         else if (completed == 4) spawn = afterLevel4Spawn;
         else if (completed >= 5) spawn = afterLevel5Spawn;
 
+        if (player == null || spawn == null)
+        {
+            Debug.LogError("Player or spawn point missing!");
+            yield break;
+        }
+
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        Rigidbody rb = player.GetComponent<Rigidbody>();
+
+        if (movement != null)
+            movement.canMove = false;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
         player.position = spawn.position;
         player.rotation = spawn.rotation;
+
+        if (rb != null)
+        {
+            rb.position = spawn.position;
+            rb.rotation = spawn.rotation;
+            rb.isKinematic = false;
+        }
+
+        yield return null;
+
+        if (movement != null)
+            movement.canMove = true;
+
+        Debug.Log("SPAWNED AT CHECKPOINT: " + spawn.name + " | Completed Step: " + completed);
     }
 }

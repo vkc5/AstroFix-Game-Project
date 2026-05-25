@@ -5,6 +5,8 @@ public class MissionIntroPanel : MonoBehaviour
     public GameObject missionPanel;
     public GameObject batteryText;
 
+    public PlayerMovement playerMovement;
+
     private bool closed = false;
 
     void Start()
@@ -14,6 +16,10 @@ public class MissionIntroPanel : MonoBehaviour
 
         if (batteryText != null)
             batteryText.SetActive(false);
+
+        // STOP PLAYER MOVEMENT
+        if (playerMovement != null)
+            playerMovement.canMove = false;
     }
 
     void Update()
@@ -27,6 +33,10 @@ public class MissionIntroPanel : MonoBehaviour
 
             if (batteryText != null)
                 batteryText.SetActive(true);
+
+            // ENABLE PLAYER MOVEMENT
+            if (playerMovement != null)
+                playerMovement.canMove = true;
         }
     }
 }
