@@ -9,6 +9,10 @@ public class MonitorInteraction : MonoBehaviour
     [Header("UI")]
     public GameObject interactPrompt;
 
+    [Header("Pause During Puzzle")]
+    public PlayerMovement playerMovement;
+    public ThirdPersonCamera thirdPersonCamera;
+
     private bool playerNear = false;
     private bool puzzleOpened = false;
 
@@ -28,31 +32,35 @@ public class MonitorInteraction : MonoBehaviour
             if (puzzleOpened)
                 return;
 
-            // Temporary true for testing
-            if (true)
-            // if (batterySystem != null && batterySystem.HasAllBatteries())
+            if (batterySystem != null && !batterySystem.HasAllBatteries())
             {
-                puzzleOpened = true;
+                Debug.Log("Need all batteries first!");
+                return;
+            }
 
-                if (interactPrompt != null)
-                    interactPrompt.SetActive(false);
+            puzzleOpened = true;
 
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+            if (interactPrompt != null)
+                interactPrompt.SetActive(false);
 
-                if (puzzleManager != null)
-                {
-                    puzzleManager.StartPuzzle();
-                    Debug.Log("Puzzle opened and StartPuzzle called!");
-                }
-                else
-                {
-                    Debug.LogError("Puzzle Manager is not assigned in MonitorInteraction!");
-                }
+            if (playerMovement != null)
+                playerMovement.enabled = false;
+
+            if (thirdPersonCamera != null)
+                thirdPersonCamera.enabled = false;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            if (puzzleManager != null && puzzleManager.puzzlePanel != null)
+            {
+                puzzleManager.puzzlePanel.SetActive(true);
+                puzzleManager.StartPuzzle();
+                Debug.Log("Puzzle opened by E");
             }
             else
             {
-                Debug.Log("Place all batteries first!");
+                Debug.LogError("Puzzle Manager or Puzzle Panel is not assigned!");
             }
         }
     }
@@ -66,7 +74,7 @@ public class MonitorInteraction : MonoBehaviour
             if (batterySystem != null)
                 batterySystem.nearMonitor = true;
 
-            if (interactPrompt != null)
+            if (interactPrompt != null && !puzzleOpened)
                 interactPrompt.SetActive(true);
 
             Debug.Log("Player near monitor");
