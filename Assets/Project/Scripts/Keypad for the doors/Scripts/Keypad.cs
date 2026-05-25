@@ -121,9 +121,16 @@ namespace NavKeypad
         private void AccessGranted()
         {
             accessWasGranted = true;
+
             keypadDisplayText.text = accessGrantedText;
+
             onAccessGranted?.Invoke();
+
+            // COMPLETE HALLWAY STEP
+            GameProgressManager.Instance.CompleteStep(0);
+
             panelMesh.material.SetVector("_EmissionColor", screenGrantedColor * screenIntensity);
+
             audioSource.PlayOneShot(accessGrantedSfx);
         }
 

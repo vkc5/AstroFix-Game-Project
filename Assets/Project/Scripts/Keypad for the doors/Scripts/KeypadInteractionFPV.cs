@@ -35,31 +35,23 @@ namespace NavKeypad
 
         private void Update()
         {
-            // Press Q to Switch Cameras and states
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 if (isInteracting)
-                {
-                    ExitInteraction(); // Switches back to Cam 1
-                }
+                    ExitInteraction();
                 else
-                {
-                    TryEnterInteraction(); // Switches to Cam 2
-                }
+                    TryEnterInteraction();
             }
 
             if (isInteracting)
             {
-                // FORCE the mouse cursor to stay free and visible for clicking
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
 
                 HandleKeyboardInput();
 
                 if (Input.GetMouseButtonDown(0))
-                {
                     HandleMouseClick();
-                }
             }
         }
 
