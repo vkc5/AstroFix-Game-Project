@@ -145,8 +145,13 @@ public class OxygenPuzzleLevel : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         //--------------------------------
+        // SAVE COMPLETION
+        //--------------------------------
+        GameProgressManager.Instance.CompleteStep(3);
+
+        //--------------------------------
         // LOAD HALLWAY
         //--------------------------------
-        SceneManager.LoadScene(nextSceneName);
+        //SceneManager.LoadScene(nextSceneName);
     }
 }

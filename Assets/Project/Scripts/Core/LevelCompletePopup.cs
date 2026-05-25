@@ -30,6 +30,6 @@ public class LevelCompletePopup : MonoBehaviour
 
         yield return new WaitForSeconds(hallwayDelay);
 
-        SceneManager.LoadScene(hallwaySceneName);
+        GameProgressManager.Instance.CompleteStep(2);
     }
 }
