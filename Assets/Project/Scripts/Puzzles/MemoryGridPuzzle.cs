@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,6 +12,7 @@ public class MemoryGridPuzzle : MonoBehaviour
 
     [Header("Text")]
     public TextMeshProUGUI messageText;
+    public Text titleLabel;
     public TextMeshProUGUI timerText;
 
     [Header("Buttons")]
@@ -22,9 +24,19 @@ public class MemoryGridPuzzle : MonoBehaviour
     public string openTriggerName = "open";
     public string closeTriggerName = "close";
 
+    [Header("Player Control")]
+    public PlayerMovement playerMovement;
+    public ThirdPersonCamera thirdPersonCamera;
+
+    [Header("Levels")]
+    public int totalLevels = 3;
+    public int currentLevel = 1;
+
+    // Harder difficulty for 6x4 grid
+    public int[] darkCellsPerLevel = { 6, 9, 12 };
+
     [Header("Settings")]
-    public float showDuration = 5f;
-    public int darkCells = 5;
+    public float[] showDurationsPerLevel = { 5f, 4f, 3f };
 
     [Header("Colors")]
     public Color hiddenColor = new Color(0.2f, 0.2f, 0.2f);
@@ -50,13 +62,6 @@ public class MemoryGridPuzzle : MonoBehaviour
             submitButton.onClick.RemoveAllListeners();
             submitButton.onClick.AddListener(CheckAnswer);
         }
-
-        Debug.Log("MemoryGridPuzzle is ready.");
-        Debug.Log("Cells Count: " + (cells != null ? cells.Length : 0));
-        Debug.Log("Message Text: " + (messageText != null ? "OK" : "MISSING"));
-        Debug.Log("Timer Text: " + (timerText != null ? "OK" : "MISSING"));
-        Debug.Log("Submit Button: " + (submitButton != null ? "OK" : "MISSING"));
-        Debug.Log("Door Animators Count: " + (doorAnimators != null ? doorAnimators.Length : 0));
     }
 
     public void StartPuzzle()
@@ -72,6 +77,13 @@ public class MemoryGridPuzzle : MonoBehaviour
         if (winPanel != null)
             winPanel.SetActive(false);
 
+        currentLevel = 1;
+
+        StartLevel();
+    }
+
+    void StartLevel()
+    {
         pattern = new bool[cells.Length];
         playerAnswer = new bool[cells.Length];
         playerCanPress = false;
@@ -96,57 +108,76 @@ public class MemoryGridPuzzle : MonoBehaviour
 
     bool CheckReferences()
     {
-        bool ok = true;
+        return puzzlePanel != null &&
+               timerText != null &&
+               submitButton != null &&
+               cells != null &&
+               cells.Length > 0;
+    }
 
-        if (puzzlePanel == null)
+    void SetMessage(string text)
+    {
+        if (messageText != null)
+            messageText.text = text;
+
+        if (titleLabel != null)
+            titleLabel.text = text;
+    }
+
+    int GetDarkCellsForCurrentLevel()
+    {
+        int index = currentLevel - 1;
+
+        if (darkCellsPerLevel != null &&
+            index >= 0 &&
+            index < darkCellsPerLevel.Length)
         {
-            Debug.LogError("Puzzle Panel is missing.");
-            ok = false;
+            return darkCellsPerLevel[index];
         }
 
-        if (messageText == null)
+        return 6;
+    }
+
+    float GetShowDurationForCurrentLevel()
+    {
+        int index = currentLevel - 1;
+
+        if (showDurationsPerLevel != null &&
+            index >= 0 &&
+            index < showDurationsPerLevel.Length)
         {
-            Debug.LogError("Message Text is missing.");
-            ok = false;
+            return showDurationsPerLevel[index];
         }
 
-        if (timerText == null)
-        {
-            Debug.LogError("Timer Text is missing.");
-            ok = false;
-        }
-
-        if (submitButton == null)
-        {
-            Debug.LogError("Submit Button is missing.");
-            ok = false;
-        }
-
-        if (cells == null || cells.Length == 0)
-        {
-            Debug.LogError("Cells are missing.");
-            ok = false;
-        }
-
-        return ok;
+        return 5f;
     }
 
     void GeneratePattern()
     {
+        int darkCells = GetDarkCellsForCurrentLevel();
+
+        if (darkCells > cells.Length)
+            darkCells = cells.Length;
+
+        // Reset all cells
         for (int i = 0; i < pattern.Length; i++)
             pattern[i] = false;
 
-        int count = 0;
+        // Better randomization
+        List<int> available = new List<int>();
 
-        while (count < darkCells)
+        for (int i = 0; i < cells.Length; i++)
+            available.Add(i);
+
+        for (int i = 0; i < darkCells; i++)
         {
-            int randomIndex = Random.Range(0, cells.Length);
+            int randomListIndex = Random.Range(0, available.Count);
 
-            if (!pattern[randomIndex])
-            {
-                pattern[randomIndex] = true;
-                count++;
-            }
+            int chosenCell = available[randomListIndex];
+
+            pattern[chosenCell] = true;
+
+            available.RemoveAt(randomListIndex);
         }
     }
 
@@ -154,31 +185,33 @@ public class MemoryGridPuzzle : MonoBehaviour
     {
         playerCanPress = false;
 
-        messageText.text = "Remember the pattern!";
+        SetMessage("Level " + currentLevel + " / " + totalLevels + " - Remember!");
         timerText.text = "";
 
+        // Show pattern
         for (int i = 0; i < cells.Length; i++)
         {
-            if (pattern[i])
-                SetColor(i, shownColor);
-            else
-                SetColor(i, hiddenColor);
+            SetColor(i, pattern[i] ? shownColor : hiddenColor);
         }
 
-        float timeLeft = showDuration;
+        float timeLeft = GetShowDurationForCurrentLevel();
 
         while (timeLeft > 0)
         {
-            timerText.text = "Hiding in: " + Mathf.CeilToInt(timeLeft) + "s";
+            timerText.text = Mathf.CeilToInt(timeLeft) + "s";
 
             yield return new WaitForSeconds(0.1f);
+
             timeLeft -= 0.1f;
         }
 
+        // Hide pattern
         for (int i = 0; i < cells.Length; i++)
+        {
             SetColor(i, hiddenColor);
+        }
 
-        messageText.text = "Now click the dark cells!";
+        SetMessage("Level " + currentLevel + " / " + totalLevels + " - Click the cells!");
         timerText.text = "";
 
         playerCanPress = true;
@@ -191,10 +224,8 @@ public class MemoryGridPuzzle : MonoBehaviour
 
         playerAnswer[index] = !playerAnswer[index];
 
-        if (playerAnswer[index])
-            SetColor(index, shownColor);
-        else
-            SetColor(index, hiddenColor);
+        SetColor(index,
+            playerAnswer[index] ? shownColor : hiddenColor);
     }
 
     public void CheckAnswer()
@@ -215,14 +246,13 @@ public class MemoryGridPuzzle : MonoBehaviour
         {
             if (playerAnswer[i] == pattern[i])
             {
-                if (pattern[i])
-                    SetColor(i, correctColor);
-                else
-                    SetColor(i, hiddenColor);
+                SetColor(i,
+                    pattern[i] ? correctColor : hiddenColor);
             }
             else
             {
                 SetColor(i, wrongColor);
+
                 allCorrect = false;
             }
         }
@@ -231,51 +261,60 @@ public class MemoryGridPuzzle : MonoBehaviour
 
         if (allCorrect)
         {
-            messageText.text = "Perfect!";
-            timerText.text = "";
+            if (currentLevel < totalLevels)
+            {
+                SetMessage("Level " + currentLevel + " complete!");
+                timerText.text = "";
 
-            yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
 
-            puzzlePanel.SetActive(false);
+                currentLevel++;
 
-            if (winPanel != null)
-                winPanel.SetActive(true);
+                StartLevel();
+            }
+            else
+            {
+                SetMessage("All levels complete!");
+                timerText.text = "";
 
-            OpenDoor();
+                yield return new WaitForSeconds(0.5f);
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+                puzzlePanel.SetActive(false);
+
+                if (winPanel != null)
+                    winPanel.SetActive(true);
+
+                OpenDoor();
+
+                if (playerMovement != null)
+                    playerMovement.enabled = true;
+
+                if (thirdPersonCamera != null)
+                    thirdPersonCamera.enabled = true;
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
         else
         {
-            messageText.text = "Wrong! Watch again...";
+            SetMessage("Wrong! Restarting Level " + currentLevel);
             timerText.text = "";
 
             yield return new WaitForSeconds(1f);
 
-            for (int i = 0; i < playerAnswer.Length; i++)
-                playerAnswer[i] = false;
-
-            puzzleRoutine = StartCoroutine(ShowThenHide());
+            StartLevel();
         }
     }
 
     void OpenDoor()
     {
-        if (doorAnimators == null || doorAnimators.Length == 0)
-        {
-            Debug.LogError("No door animators assigned!");
-            return;
-        }
-
         foreach (Animator anim in doorAnimators)
         {
             if (anim != null)
             {
                 anim.ResetTrigger(closeTriggerName);
                 anim.SetTrigger(openTriggerName);
-
-                Debug.Log("Door open trigger sent to: " + anim.gameObject.name);
             }
         }
     }
