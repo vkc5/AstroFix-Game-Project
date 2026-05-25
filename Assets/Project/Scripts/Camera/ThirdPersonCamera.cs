@@ -6,8 +6,8 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform target;
 
     [Header("Camera Position")]
-    public float distance = 5.5f;
-    public float height = 2.2f;
+    public float distance = 2f;
+    public float height = 0f;
     public float smoothSpeed = 10f;
 
     [Header("Rotation")]
@@ -23,7 +23,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private float yaw;
     private float pitch = 10f;
-
+    private Vector3 velocity;
     void Start()
     {
         if (target != null)
@@ -65,7 +65,12 @@ public class ThirdPersonCamera : MonoBehaviour
 
         Vector3 finalCameraPosition = targetPoint - rotation * Vector3.forward * finalDistance;
 
-        transform.position = Vector3.Lerp(transform.position, finalCameraPosition, smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            finalCameraPosition,
+            ref velocity,
+            0.08f
+        );
         transform.LookAt(targetPoint);
     }
 }

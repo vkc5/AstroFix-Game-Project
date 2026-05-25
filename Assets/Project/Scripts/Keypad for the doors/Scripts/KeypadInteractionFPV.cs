@@ -35,8 +35,8 @@ namespace NavKeypad
 
         private void Update()
         {
-            // Press Q to Switch Cameras and states
-            if (Input.GetKeyDown(KeyCode.Q))
+            // CHANGED: Changed interaction key from Q to E to match team merge requirements
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 if (isInteracting)
                 {
@@ -151,6 +151,6 @@ namespace NavKeypad
                 activeKeypad.AddInput("enter");
             }
         }
-        
+
     }
 }

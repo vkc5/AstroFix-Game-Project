@@ -46,19 +46,26 @@ namespace NavKeypad
         private void Awake()
         {
             ClearInput();
-            panelMesh.material.SetVector("_EmissionColor", screenNormalColor * screenIntensity);
+            if (panelMesh != null)
+                panelMesh.material.SetVector("_EmissionColor", screenNormalColor * screenIntensity);
         }
 
 
-        //Gets value from pressedbutton
+        // Gets value from pressedbutton or keyboard inputs
         public void AddInput(string input)
         {
-            audioSource.PlayOneShot(buttonClickedSfx);
+            if (audioSource != null && buttonClickedSfx != null)
+                audioSource.PlayOneShot(buttonClickedSfx);
+
             if (displayingResult || accessWasGranted) return;
+
             switch (input)
             {
                 case "enter":
                     CheckCombo();
+                    break;
+                case "backspace": // NEW: Handle clearing the last digit entered
+                    DeleteLastInput();
                     break;
                 default:
                     if (currentInput != null && currentInput.Length == 9) // 9 max passcode size 
@@ -69,8 +76,8 @@ namespace NavKeypad
                     keypadDisplayText.text = currentInput;
                     break;
             }
-
         }
+
         public void CheckCombo()
         {
             if (int.TryParse(currentInput, out var currentKombo))
@@ -84,11 +91,13 @@ namespace NavKeypad
             else
             {
                 Debug.LogWarning("Couldn't process input for some reason..");
+                if (!displayingResult)
+                {
+                    StartCoroutine(DisplayResultRoutine(false));
+                }
             }
-
         }
 
-        //mainly for animations 
         private IEnumerator DisplayResultRoutine(bool granted)
         {
             displayingResult = true;
@@ -98,18 +107,31 @@ namespace NavKeypad
 
             yield return new WaitForSeconds(displayResultTime);
             displayingResult = false;
-            if (granted) yield break;
-            ClearInput();
-            panelMesh.material.SetVector("_EmissionColor", screenNormalColor * screenIntensity);
 
+            if (granted)
+            {
+                // NEW: Auto Exit Keypad camera layout back to gameplay view once access is granted
+                KeypadInteractionFPV playerInteraction = FindFirstObjectByType<KeypadInteractionFPV>();
+                if (playerInteraction != null)
+                {
+                    playerInteraction.ExitInteraction();
+                }
+                yield break;
+            }
+
+            ClearInput();
+            if (panelMesh != null)
+                panelMesh.material.SetVector("_EmissionColor", screenNormalColor * screenIntensity);
         }
 
         private void AccessDenied()
         {
             keypadDisplayText.text = accessDeniedText;
             onAccessDenied?.Invoke();
-            panelMesh.material.SetVector("_EmissionColor", screenDeniedColor * screenIntensity);
-            audioSource.PlayOneShot(accessDeniedSfx);
+            if (panelMesh != null)
+                panelMesh.material.SetVector("_EmissionColor", screenDeniedColor * screenIntensity);
+            if (audioSource != null && accessDeniedSfx != null)
+                audioSource.PlayOneShot(accessDeniedSfx);
         }
 
         private void ClearInput()
@@ -118,14 +140,25 @@ namespace NavKeypad
             keypadDisplayText.text = currentInput;
         }
 
+        // NEW: Allows the user to backspace or clear mistake inputs
+        private void DeleteLastInput()
+        {
+            if (!string.IsNullOrEmpty(currentInput) && currentInput.Length > 0)
+            {
+                currentInput = currentInput.Substring(0, currentInput.Length - 1);
+                keypadDisplayText.text = currentInput;
+            }
+        }
+
         private void AccessGranted()
         {
             accessWasGranted = true;
             keypadDisplayText.text = accessGrantedText;
             onAccessGranted?.Invoke();
-            panelMesh.material.SetVector("_EmissionColor", screenGrantedColor * screenIntensity);
-            audioSource.PlayOneShot(accessGrantedSfx);
+            if (panelMesh != null)
+                panelMesh.material.SetVector("_EmissionColor", screenGrantedColor * screenIntensity);
+            if (audioSource != null && accessGrantedSfx != null)
+                audioSource.PlayOneShot(accessGrantedSfx);
         }
-
     }
 }
