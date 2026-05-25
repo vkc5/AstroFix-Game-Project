@@ -3419,7 +3419,7 @@ MonoBehaviour:
   cameraScript: {fileID: 1880379789}
   portalObject: {fileID: 2020063913}
   carriedKeyObject: {fileID: 1921681180}
-  timer: {fileID: 1211082690}
+  timer: {fileID: 1984287013}
   wrongPenalty: 10
 --- !u!65 &291162664
 BoxCollider:
@@ -12515,7 +12515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4b2edef622b2f4badcacb547e3b55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FinalLevelTimer
-  timeRemaining: 165
+  timeRemaining: 300
   timerText: {fileID: 0}
   failPanel: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -21155,6 +21155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   startTime: 300
   timerText: {fileID: 1006771545}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  penaltyColor: {r: 1, g: 0, b: 0, a: 1}
+  penaltyFlashDuration: 1.2
 --- !u!4 &1984287014
 Transform:
   m_ObjectHideFlags: 0

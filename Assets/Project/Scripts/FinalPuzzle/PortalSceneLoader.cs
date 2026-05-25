@@ -11,7 +11,7 @@ public class PortalSceneLoader : MonoBehaviour
     public Image flashPanel;
     public float flashDuration = 0.8f;
 
-    private bool portalReady = true;
+    private bool portalReady = false;
     private bool loading = false;
 
     public void ActivatePortal()
