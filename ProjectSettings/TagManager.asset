@@ -12,6 +12,7 @@ TagManager:
   - LaserSource
   - Music
   - SFX
+  - CanPickUp
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Keypad
-  - 
+  - Flashlight
   - 
   - 
   - 
