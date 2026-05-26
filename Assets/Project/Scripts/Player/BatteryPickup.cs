@@ -12,6 +12,13 @@ public class BatteryPickup : MonoBehaviour
     public PowerLightingManager lightingManager;
     public PowerGlowManager glowManager;
 
+    [Header("Animation")]
+    public Animator playerAnimator;
+    public float pickupAnimationDelay = 1.2f;
+
+    [Header("HUD")]
+    public GameObject carryingBatteryHUD;
+
     [Header("Audio")]
     public AudioSource powerRestoredSound;
 
@@ -22,6 +29,7 @@ public class BatteryPickup : MonoBehaviour
     private GameObject heldBattery;
     private int placedBatteries = 0;
     private bool powerMessageShown = false;
+    private bool isPickingUp = false;
 
     public bool nearMonitor = false;
 
@@ -34,6 +42,9 @@ public class BatteryPickup : MonoBehaviour
     {
         UpdateBatteryText();
 
+        if (carryingBatteryHUD != null)
+            carryingBatteryHUD.SetActive(false);
+
         if (puzzleHUD != null)
             puzzleHUD.SetActive(false);
 
@@ -44,6 +55,7 @@ public class BatteryPickup : MonoBehaviour
     void Update()
     {
         if (nearMonitor) return;
+        if (isPickingUp) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -64,18 +76,43 @@ public class BatteryPickup : MonoBehaviour
 
             if (distance <= interactRange)
             {
-                heldBattery = battery;
-                heldBattery.transform.SetParent(holdPoint);
-                heldBattery.transform.localPosition = Vector3.zero;
-                heldBattery.transform.localRotation = Quaternion.identity;
-
-                Rigidbody rb = heldBattery.GetComponent<Rigidbody>();
-                if (rb != null)
-                    rb.isKinematic = true;
-
+                StartCoroutine(PickupBatteryRoutine(battery));
                 return;
             }
         }
+    }
+
+    IEnumerator PickupBatteryRoutine(GameObject battery)
+    {
+        isPickingUp = true;
+
+        if (playerAnimator != null)
+            playerAnimator.SetTrigger("PickUp");
+
+        yield return new WaitForSeconds(pickupAnimationDelay);
+
+        heldBattery = battery;
+
+        heldBattery.transform.SetParent(holdPoint);
+        heldBattery.transform.localPosition = Vector3.zero;
+        heldBattery.transform.localRotation = Quaternion.identity;
+
+        Rigidbody rb = heldBattery.GetComponent<Rigidbody>();
+        if (rb != null)
+            rb.isKinematic = true;
+
+        Renderer[] renderers = heldBattery.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+            r.enabled = false;
+
+        Collider[] colliders = heldBattery.GetComponentsInChildren<Collider>();
+        foreach (Collider c in colliders)
+            c.enabled = false;
+
+        if (carryingBatteryHUD != null)
+            carryingBatteryHUD.SetActive(true);
+
+        isPickingUp = false;
     }
 
     void PlaceInNearestSlot()
@@ -92,7 +129,15 @@ public class BatteryPickup : MonoBehaviour
                 heldBattery.transform.position = slot.transform.position;
                 heldBattery.transform.rotation = slot.transform.rotation;
                 heldBattery.tag = "Untagged";
+
+                Renderer[] renderers = heldBattery.GetComponentsInChildren<Renderer>();
+                foreach (Renderer r in renderers)
+                    r.enabled = true;
+
                 heldBattery = null;
+
+                if (carryingBatteryHUD != null)
+                    carryingBatteryHUD.SetActive(false);
 
                 if (placedBatteries < totalBatteries)
                     placedBatteries++;
@@ -102,6 +147,9 @@ public class BatteryPickup : MonoBehaviour
                 if (placedBatteries >= totalBatteries && !powerMessageShown)
                 {
                     powerMessageShown = true;
+
+                    if (carryingBatteryHUD != null)
+                        carryingBatteryHUD.SetActive(false);
 
                     if (powerRestoredSound != null)
                         powerRestoredSound.Play();
