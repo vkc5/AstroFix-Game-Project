@@ -12,11 +12,18 @@ public class BatteryPickup : MonoBehaviour
     public PowerLightingManager lightingManager;
     public PowerGlowManager glowManager;
 
+    [Header("Audio")]
+    public AudioSource powerRestoredSound;
+
+    [Header("Puzzle Unlock")]
+    public GameObject puzzleHUD;
+    public MemoryGridPuzzle memoryPuzzle;
+
     private GameObject heldBattery;
     private int placedBatteries = 0;
     private bool powerMessageShown = false;
 
-    public bool nearMonitor = false; // set by MonitorInteraction
+    public bool nearMonitor = false;
 
     public bool HasAllBatteries()
     {
@@ -26,11 +33,17 @@ public class BatteryPickup : MonoBehaviour
     void Start()
     {
         UpdateBatteryText();
+
+        if (puzzleHUD != null)
+            puzzleHUD.SetActive(false);
+
+        if (memoryPuzzle != null)
+            memoryPuzzle.SetPuzzleUnlocked(false);
     }
 
     void Update()
     {
-        if (nearMonitor) return; // ignore E key when near monitor
+        if (nearMonitor) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -90,11 +103,20 @@ public class BatteryPickup : MonoBehaviour
                 {
                     powerMessageShown = true;
 
+                    if (powerRestoredSound != null)
+                        powerRestoredSound.Play();
+
                     if (lightingManager != null)
                         lightingManager.TurnOnPowerLights();
 
                     if (glowManager != null)
                         glowManager.TurnOnGlow();
+
+                    if (puzzleHUD != null)
+                        puzzleHUD.SetActive(true);
+
+                    if (memoryPuzzle != null)
+                        memoryPuzzle.SetPuzzleUnlocked(true);
 
                     StartCoroutine(ShowPowerRestoredMessage());
                 }

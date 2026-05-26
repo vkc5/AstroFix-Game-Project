@@ -20,6 +20,8 @@ public class MissionIntroPanel : MonoBehaviour
         // STOP PLAYER MOVEMENT
         if (playerMovement != null)
             playerMovement.canMove = false;
+        PauseSceneLoader.Instance.canPause = false;
+
     }
 
     void Update()
@@ -37,6 +39,8 @@ public class MissionIntroPanel : MonoBehaviour
             // ENABLE PLAYER MOVEMENT
             if (playerMovement != null)
                 playerMovement.canMove = true;
+
+            PauseSceneLoader.Instance.canPause = true;
         }
     }
 }

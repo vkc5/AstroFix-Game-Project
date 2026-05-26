@@ -12,12 +12,16 @@ public class MonitorInteraction : MonoBehaviour
     [Header("Pause During Puzzle")]
     public PlayerMovement playerMovement;
     public ThirdPersonCamera thirdPersonCamera;
+    private Rigidbody playerRb;
 
     private bool playerNear = false;
     private bool puzzleOpened = false;
 
     void Start()
     {
+        if (playerMovement != null)
+            playerRb = playerMovement.GetComponent<Rigidbody>();
+
         if (puzzleManager != null && puzzleManager.puzzlePanel != null)
             puzzleManager.puzzlePanel.SetActive(false);
 
@@ -27,41 +31,59 @@ public class MonitorInteraction : MonoBehaviour
 
     void Update()
     {
-        if (playerNear && Input.GetKeyDown(KeyCode.E))
+        if (!playerNear || !Input.GetKeyDown(KeyCode.E))
+            return;
+
+        if (puzzleOpened)
+            return;
+
+        if (batterySystem == null || !batterySystem.HasAllBatteries())
         {
-            if (puzzleOpened)
-                return;
+            Debug.Log("Need all batteries first!");
+            return;
+        }
 
-            if (batterySystem != null && !batterySystem.HasAllBatteries())
+        puzzleOpened = true;
+
+        if (interactPrompt != null)
+            interactPrompt.SetActive(false);
+
+        // FULLY STOP PLAYER PHYSICS
+        if (playerRb != null)
+        {
+            playerRb.linearVelocity = Vector3.zero;
+            playerRb.angularVelocity = Vector3.zero;
+        }
+
+        // STOP RUNNING ANIMATION
+        if (playerMovement != null)
+        {
+            Animator anim = playerMovement.GetComponent<Animator>();
+
+            if (anim != null)
             {
-                Debug.Log("Need all batteries first!");
-                return;
+                anim.SetFloat("Speed", 0f);
+                anim.Play("Idle", 0, 0f);
             }
 
-            puzzleOpened = true;
+            playerMovement.canMove = false;
+            playerMovement.enabled = false;
+        }
 
-            if (interactPrompt != null)
-                interactPrompt.SetActive(false);
+        if (thirdPersonCamera != null)
+            thirdPersonCamera.enabled = false;
 
-            if (playerMovement != null)
-                playerMovement.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-            if (thirdPersonCamera != null)
-                thirdPersonCamera.enabled = false;
-
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
-            if (puzzleManager != null && puzzleManager.puzzlePanel != null)
-            {
-                puzzleManager.puzzlePanel.SetActive(true);
-                puzzleManager.StartPuzzle();
-                Debug.Log("Puzzle opened by E");
-            }
-            else
-            {
-                Debug.LogError("Puzzle Manager or Puzzle Panel is not assigned!");
-            }
+        if (puzzleManager != null)
+        {
+            puzzleManager.StartPuzzle();
+            Debug.Log("Puzzle opened by E");
+        }
+        else
+        {
+            Debug.LogError("Puzzle Manager is not assigned!");
         }
     }
 
@@ -75,7 +97,11 @@ public class MonitorInteraction : MonoBehaviour
                 batterySystem.nearMonitor = true;
 
             if (interactPrompt != null && !puzzleOpened)
-                interactPrompt.SetActive(true);
+            {
+                bool hasAllBatteries = batterySystem != null && batterySystem.HasAllBatteries();
+
+                interactPrompt.SetActive(hasAllBatteries);
+            }
 
             Debug.Log("Player near monitor");
         }

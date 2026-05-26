@@ -49,6 +49,11 @@ public class MemoryGridPuzzle : MonoBehaviour
     private bool playerCanPress = false;
     private Coroutine puzzleRoutine;
 
+    [Header("Win Sound")]
+    public AudioSource winSound;
+
+    private bool puzzleUnlocked = false;
+
     void Start()
     {
         if (puzzlePanel != null)
@@ -66,6 +71,12 @@ public class MemoryGridPuzzle : MonoBehaviour
 
     public void StartPuzzle()
     {
+        if (!puzzleUnlocked)
+        {
+            Debug.Log("Puzzle locked. Insert all batteries first.");
+            return;
+        }
+
         if (!CheckReferences())
             return;
 
@@ -286,7 +297,11 @@ public class MemoryGridPuzzle : MonoBehaviour
 
                 OpenDoor();
 
-                // SAVE LEVEL 1 COMPLETE
+                if (winSound != null)
+                    winSound.Play();
+
+                yield return new WaitForSeconds(3f);
+
                 GameProgressManager.Instance.CompleteStep(1);
 
                 if (playerMovement != null)
@@ -331,5 +346,9 @@ public class MemoryGridPuzzle : MonoBehaviour
 
         if (image != null)
             image.color = color;
+    }
+    public void SetPuzzleUnlocked(bool state)
+    {
+        puzzleUnlocked = state;
     }
 }
