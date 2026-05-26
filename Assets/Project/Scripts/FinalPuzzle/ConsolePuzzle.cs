@@ -20,12 +20,15 @@ public class ConsolePuzzle : MonoBehaviour
     [Header("Portal")]
     public GameObject portalObject;
 
+    [Header("Portal Ending")]
+    public PortalSceneLoader portalSceneLoader;
+
     [Header("Inserted Key Visual")]
     public GameObject carriedKeyObject;
     private bool keyInserted = false;
 
     [Header("Timer Penalty")]
-    public FinalLevelTimer timer;
+    public Timer timer;
     public float wrongPenalty = 10f;
 
     private bool playerNear = false;
@@ -48,8 +51,7 @@ public class ConsolePuzzle : MonoBehaviour
         // AUTO FIND TIMER if not assigned in Inspector
         if (timer == null)
         {
-            timer = FindFirstObjectByType<FinalLevelTimer>();
-
+            timer = FindFirstObjectByType<Timer>();
             if (timer != null)
                 Debug.Log("ConsolePuzzle found FinalLevelTimer automatically.");
             else
@@ -147,13 +149,18 @@ public class ConsolePuzzle : MonoBehaviour
         {
             puzzleSolved = true;
 
-            feedbackText.text = "ACCESS GRANTED. PORTAL OPENING...";
+            feedbackText.text = "ACCESS GRANTED. PORTAL STABILIZED. ENTER THE PORTAL.";
             feedbackText.color = Color.green;
 
             if (portalObject != null)
                 portalObject.SetActive(true);
             else
                 Debug.LogWarning("Portal Object is not assigned.");
+
+            if (portalSceneLoader != null)
+                portalSceneLoader.ActivatePortal();
+            else
+                Debug.LogWarning("Portal Scene Loader is not assigned.");
 
             StartCoroutine(ClosePanelAfterDelay());
         }
@@ -168,8 +175,7 @@ public class ConsolePuzzle : MonoBehaviour
 
             // Try again if timer somehow became null
             if (timer == null)
-                timer = FindFirstObjectByType<FinalLevelTimer>();
-
+                timer = FindFirstObjectByType<Timer>();
             if (timer != null)
             {
                 timer.RemoveTime(wrongPenalty);

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FinalLevelTimer : MonoBehaviour
 {
-    public float timeRemaining = 165f; // 2:45
+    public float timeRemaining = 300f; // 5:00
     public TextMeshProUGUI timerText;
     public GameObject failPanel;
 
@@ -23,9 +23,8 @@ public class FinalLevelTimer : MonoBehaviour
             normalColor = timerText.color;
 
         UpdateTimerUI();
-
-        if (failPanel != null)
-            failPanel.SetActive(false);
+        timerText.text = "TEST";
+        timerText.color = Color.red;
     }
 
     void Update()
