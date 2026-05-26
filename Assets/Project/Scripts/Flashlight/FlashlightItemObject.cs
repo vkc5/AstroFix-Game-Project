@@ -7,6 +7,9 @@ namespace NavKeypad
         [Header("Interaction Settings")]
         [SerializeField] private float interactDistance = 2.5f;
 
+        [Header("HUD / Popup")]
+        [SerializeField] private GameObject flashHUD;
+
         [Header("Camera Switcher (Optional Setup)")]
         [SerializeField] private GameObject camera_1_ThirdPerson;
         [SerializeField] private GameObject camera_3_FirstPerson;
@@ -24,23 +27,21 @@ namespace NavKeypad
 
             playerMovement = FindObjectOfType<PlayerMovement>();
             if (playerMovement != null)
-            {
                 playerTransform = playerMovement.transform;
-            }
 
             if (camera_1_ThirdPerson == null)
-            {
                 camera_1_ThirdPerson = GameObject.Find("Main Camera");
-            }
 
             if (camera_3_FirstPerson == null && playerTransform != null)
             {
                 Transform fpvCamTransform = playerTransform.Find("FirstPersonCamera");
                 if (fpvCamTransform != null)
-                {
                     camera_3_FirstPerson = fpvCamTransform.gameObject;
-                }
             }
+
+            if (flashHUD != null)
+                flashHUD.SetActive(true);
+
         }
 
         void Update()
@@ -55,9 +56,7 @@ namespace NavKeypad
                     float dotProduct = Vector3.Dot(playerTransform.forward, directionToSub);
 
                     if (dotProduct > 0.4f)
-                    {
                         ExecutePickup();
-                    }
                 }
             }
             else if (isPickedUp && Input.GetKeyDown(KeyCode.O))
@@ -70,13 +69,14 @@ namespace NavKeypad
         {
             isPickedUp = true;
 
+            if (flashHUD != null)
+                flashHUD.SetActive(false);
+
             if (camera_1_ThirdPerson != null) camera_1_ThirdPerson.SetActive(false);
             if (camera_3_FirstPerson != null) camera_3_FirstPerson.SetActive(true);
 
             if (playerMovement != null)
-            {
                 playerMovement.SetFlashlightMode(true, camera_3_FirstPerson);
-            }
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -96,12 +96,11 @@ namespace NavKeypad
             if (camera_3_FirstPerson != null) camera_3_FirstPerson.SetActive(false);
 
             if (playerMovement != null)
-            {
                 playerMovement.SetFlashlightMode(false, null);
-            }
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // POINTER DISAPPEARS AFTER DROP
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             transform.position = playerTransform.position + Vector3.up * 0.05f;
 
@@ -123,7 +122,10 @@ namespace NavKeypad
                 rb.isKinematic = true;
             }
 
+            if (flashHUD != null)
+                flashHUD.SetActive(true);
+
             Debug.Log("Flashlight dropped horizontally on the floor via O.");
         }
     }
-    }
+}
