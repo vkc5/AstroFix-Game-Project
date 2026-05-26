@@ -84,8 +84,8 @@ public class GameProgressManager : MonoBehaviour
 
         SaveProgress();
 
-        // ONLY return to hallway if NOT hallway mission
-        if (stepNumber != 0)
+        // DO NOT return for hallway mission OR ending
+        if (stepNumber != 0 && stepNumber != 5)
         {
             SceneManager.LoadScene(hallwaySceneName);
         }

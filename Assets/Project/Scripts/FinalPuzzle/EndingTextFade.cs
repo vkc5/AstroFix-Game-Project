@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
 
@@ -6,6 +7,10 @@ public class EndingTextFade : MonoBehaviour
 {
     [Header("Text Reference")]
     public TextMeshProUGUI missionText;
+
+    [Header("End Popup")]
+    public GameObject endPopup;
+    public string mainMenuSceneName = "Start Menu";
 
     [Header("Ending Lines")]
     [TextArea(2, 5)]
@@ -26,6 +31,9 @@ public class EndingTextFade : MonoBehaviour
 
     private void Start()
     {
+        if (endPopup != null)
+            endPopup.SetActive(false);
+
         if (missionText == null)
         {
             Debug.LogError("Mission Text is not assigned.");
@@ -54,6 +62,20 @@ public class EndingTextFade : MonoBehaviour
         }
 
         yield return StartCoroutine(FadeText(1f, 0f));
+
+        GameProgressManager.Instance.CompleteStep(5);
+
+        if (endPopup != null)
+            endPopup.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     private string BuildTextUpToLine(int currentLine)
@@ -94,5 +116,13 @@ public class EndingTextFade : MonoBehaviour
         Color c = missionText.color;
         c.a = alpha;
         missionText.color = c;
+    }
+    public void Quit()
+    {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+		        Application.Quit();
+        #endif
     }
 }

@@ -6,6 +6,11 @@ public class KeyItem : MonoBehaviour
     public string letter = "T";
     public GameObject interactText;
 
+    [Header("Player Animation")]
+    public Animator playerAnimator;
+    public string pickupTriggerName = "PickUp";
+    public float pickupAnimationDelay = 1.2f;
+
     [Header("Collect Animation")]
     public Transform collectTarget;
     public float moveDuration = 0.45f;
@@ -38,17 +43,30 @@ public class KeyItem : MonoBehaviour
                 return;
             }
 
-            collected = true;
-
-            playerInventory.AddKey(letter);
-
-            if (interactText != null)
-                interactText.SetActive(false);
-
-            gameObject.SetActive(false);
-            return;
-
+            StartCoroutine(CollectKeyRoutine());
         }
+    }
+
+    private IEnumerator CollectKeyRoutine()
+    {
+        collected = true;
+
+        if (interactText != null)
+            interactText.SetActive(false);
+
+        if (keyCollider != null)
+            keyCollider.enabled = false;
+
+        if (playerAnimator != null)
+            playerAnimator.SetTrigger(pickupTriggerName);
+
+        yield return new WaitForSeconds(pickupAnimationDelay);
+
+        playerInventory.AddKey(letter);
+
+        yield return StartCoroutine(AnimateToHand());
+
+        gameObject.SetActive(false);
     }
 
     private IEnumerator AnimateToHand()
@@ -78,14 +96,10 @@ public class KeyItem : MonoBehaviour
             yield return null;
         }
 
-        // Attach the real key to the hand/socket after the animation finishes
         transform.SetParent(collectTarget, false);
-
-        transform.localPosition = Vector3.zero;
-        transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-        transform.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
-
-        Debug.Log("FINAL KEY ROTATION: " + transform.localEulerAngles);
+        transform.localPosition = handLocalPosition;
+        transform.localEulerAngles = handLocalRotation;
+        transform.localScale = handLocalScale;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -99,10 +113,11 @@ public class KeyItem : MonoBehaviour
             if (playerInventory == null)
                 playerInventory = other.transform.root.GetComponent<PlayerKeyInventory>();
 
+            if (playerAnimator == null && playerInventory != null)
+                playerAnimator = playerInventory.GetComponent<Animator>();
+
             if (interactText != null)
                 interactText.SetActive(true);
-
-            Debug.Log("Player near final key. Press E.");
         }
     }
 
