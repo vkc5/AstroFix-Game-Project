@@ -23,8 +23,9 @@ public class FinalLevelTimer : MonoBehaviour
             normalColor = timerText.color;
 
         UpdateTimerUI();
-        timerText.text = "TEST";
-        timerText.color = Color.red;
+
+        if (failPanel != null)
+            failPanel.SetActive(false);
     }
 
     void Update()
