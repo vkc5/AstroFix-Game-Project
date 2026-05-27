@@ -39,10 +39,15 @@ public class PanelManager : MonoBehaviour {
 
 		m_PreviouslySelected = newPreviouslySelected;
 
-		m_Open = anim;
-		m_Open.SetBool(m_OpenParameterId, true);
+        m_Open = anim;
 
-		GameObject go = FindFirstEnabledSelectable(anim.gameObject);
+        m_Open.updateMode = AnimatorUpdateMode.UnscaledTime;
+        m_Open.Play("Closed", 0, 0f);
+        m_Open.Update(0f);
+
+        m_Open.SetBool(m_OpenParameterId, true);
+
+        GameObject go = FindFirstEnabledSelectable(anim.gameObject);
 
 		SetSelected(go);
 	}
@@ -82,8 +87,8 @@ public class PanelManager : MonoBehaviour {
 
 			wantToClose = !anim.GetBool(m_OpenParameterId);
 
-			yield return new WaitForEndOfFrame();
-		}
+            yield return null;
+        }
 
 		if (wantToClose)
 			anim.gameObject.SetActive(false);
