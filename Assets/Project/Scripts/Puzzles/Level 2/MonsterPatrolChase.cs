@@ -23,6 +23,8 @@ public class MonsterPatrolChase : MonoBehaviour
 
     void Start()
     {
+        LevelStateManager.LevelCompleted = false;
+
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
