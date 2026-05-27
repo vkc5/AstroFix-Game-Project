@@ -40,9 +40,12 @@ public class LevelStartPopup : MonoBehaviour
 
         if (monster != null)
             monster.enabled = true;
-        
+
         PauseSceneLoader.Instance.canPause = true;
 
         Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

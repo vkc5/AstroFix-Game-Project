@@ -21318,9 +21318,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: a93c012dd9ef6454fa7d140e976926f7, type: 3}
       propertyPath: m_Text
-      value: "Objective\n\u2714 Insert the collected key letters\n\u2714 Activate
-        the station engine\n\nDanger\n\u26A0 Random electrical sparks detected\n\u26A0
-        Countdown timer activated\n\u26A0 Incorrect attempts waste valuable time"
+      value: "Objective\n\u2714 Find the last key \n\u2714 Insert the collected key
+        letters\n\u2714 Activate the station engine\n\nDanger\n\u26A0 Random electrical
+        sparks detected\n\u26A0 Countdown timer activated\n\u26A0 Incorrect attempts
+        waste valuable time"
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: a93c012dd9ef6454fa7d140e976926f7, type: 3}
       propertyPath: m_FontData.m_MaxSize

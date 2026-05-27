@@ -13748,7 +13748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelDoor
   stepNumber: 4
-  levelSceneName: 
+  levelSceneName: Level Room 4
   player: {fileID: 3357543449193854868}
   objectivePopup: {fileID: 1089313825}
   interactHUD: {fileID: 1089313825}

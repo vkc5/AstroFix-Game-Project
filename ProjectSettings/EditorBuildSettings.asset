@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/OXYGEN SYSTEM ROOM.unity
     guid: 76dd51fc497a50348ad6ea13ccd7aad1
   - enabled: 1
+    path: Assets/Project/Scenes/Level Room 4.unity
+    guid: 34a940bb259a93d46848c075e83c503f
+  - enabled: 1
     path: Assets/Project/Scenes/EndingScene.unity
     guid: 0b677c8438eb00747b304e9297968b5b
   - enabled: 1
